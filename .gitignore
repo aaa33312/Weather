@@ -1,0 +1,55 @@
+## Visual Studio and .NET build 
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+*.vscode/
+*.DS_Store
+
+## Build outputs
+/[Bb]uild/
+/[Rr]elease/
+/[Dd]ebug/
+/x64/
+/x86/
+/[Oo]ut/
+/[Ll]ogs/
+/publish/
+
+## Temporary files
+*.tmp
+*.log
+*.cache
+*.bak
+*.swp
+*.db
+*.sdf
+*.ldf
+*.sqlite
+
+## Test, package files 
+*.nupkg
+*.snupkg
+TestResults/
+.vscoverage
+*.coverage
+*.coveragexml
+
+## Configuration secrets
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+
+## System
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+## JetBrains Rider
+.idea/
+
+## Git
+*.orig
