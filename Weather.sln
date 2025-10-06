@@ -28,4 +28,7 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5D7FA20B-3E06-4533-BC06-9F760F06F29A}
 	EndGlobalSection
+        GlobalSection(StartupProjects) = preSolution
+		StartupProjects = WeatherApp;WeatherClient
+	EndGlobalSection
 EndGlobal
