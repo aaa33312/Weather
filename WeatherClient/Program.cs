@@ -57,9 +57,17 @@ class Program
 
     private static string GetApiBaseUrl()
     {
-        string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WeatherApp");
-        string file = Path.Combine(folder, "api_url.txt");
+        var file = SharedPaths.GetApiUrlFilePath();
+        var maxWait = 20f;
 
-        return File.ReadAllText(file).Trim();
+        for (int i = 0; i < maxWait; i++)
+        {
+            if (File.Exists(file))
+                return File.ReadAllText(file).Trim();
+
+            Thread.Sleep(300);
+        }
+
+        throw new FileNotFoundException("Файл api_url.txt не найден");
     }
 }

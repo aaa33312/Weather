@@ -1,3 +1,4 @@
+using WeatherApp.Contracts;
 using WeatherApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,15 +7,18 @@ builder.Services.AddControllers();
 var app = builder.Build();
 app.MapControllers();
 
-app.Lifetime.ApplicationStarted.Register(() =>
-    File.WriteAllText(
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "WeatherApp", "api_url.txt"),
-        app.Urls.First()
-    ));
+var file = SharedPaths.GetApiUrlFilePath();
 
-app.Lifetime.ApplicationStopping.Register(() =>
-    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-    "WeatherApp", "api_url.txt")));
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+    File.WriteAllText(file, app.Urls.FirstOrDefault());
+});
+
+AppDomain.CurrentDomain.ProcessExit += (_, _) =>
+{
+    if (File.Exists(file))
+        File.Delete(file);
+};
 
 app.Run();
